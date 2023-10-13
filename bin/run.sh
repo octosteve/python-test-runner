@@ -1,6 +1,7 @@
 #! /bin/sh
-root="$( dirname "$( cd "$( dirname "$0" )" >/dev/null 2>&1 && pwd )" )"
+root="/opt/test-runner"
 export PYTHONPATH="$root:$PYTHONPATH"
-python3 bin/run.py octosteve_sample_tests $GITHUB_WORKSPACE/ $GITHUB_WORKSPACE/autograding_output/
+# run bin/run.py from action root
+python3 /opt/test-runner/bin/run.py octosteve_sample_tests ./ ./autograding_output/
 
-echo "result=$(cat $GITHUB_WORKSPACE/autograding_output/result.json | jq -c .)" >> $GITHUB_OUTPUT
+echo "result=$(cat $GITHUB_WORKSPACE/autograding_output/result.json)" >> $GITHUB_OUTPUT
