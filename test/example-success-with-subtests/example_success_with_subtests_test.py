@@ -4,7 +4,6 @@ import pytest
 
 from example_success_with_subtests import hello
 
-
 class ExampleSuccessWithSubtestsTest(unittest.TestCase):
 
     @pytest.mark.task(taskno=1)
