@@ -11,7 +11,7 @@ import shutil
 
 import pytest
 
-from .data import Slug, Directory, Hierarchy, Results, Test
+from .data import Directory, Hierarchy, Results, Test
 from .sort import TestOrder
 
 
@@ -190,20 +190,16 @@ def _sanitize_args(args: List[str]) -> List[str]:
     return clean
 
 
-def run(slug: Slug, indir: Directory, outdir: Directory, args: List[str]) -> None:
+def run(indir: Directory, outdir: Directory, args: List[str]) -> None:
     """
     Run the tests for the given exercise and produce a results.json.
     """
     test_files = []
-    config_file = indir.joinpath(".meta").joinpath("config.json")
 
-    if config_file.is_file():
-        config_data = json.loads(config_file.read_text())
-        for filename in config_data.get('files', {}).get('test', []):
-            test_files.append(indir.joinpath(filename))
-
-    if not test_files:
-        test_files.append(indir.joinpath(slug.replace("-", "_") + "_test.py"))
+    for root, dirs, files in os.walk(indir):
+        for file in files:
+            if file.endswith("_test.py"):
+                test_files.append(Path(root) / file)
 
     out_file = outdir.joinpath("results.json")
 
