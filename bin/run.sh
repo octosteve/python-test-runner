@@ -6,5 +6,5 @@ export PYTHONPATH="$root:$PYTHONPATH"
 mkdir autograding_output
 
 python3 /opt/test-runner/bin/run.py ./ ./autograding_output/
-echo "result=$(jq -c . results.json | jq -sRr @uri)"
-echo "result=$(jq -c . autograding_output/results.json | jq -sRr @uri)" >> $GITHUB_OUTPUT
+echo "result=$(jq -c . results.json | jq -sRr @base64)"
+echo "result=$(jq -c . autograding_output/results.json | jq -sRr @base64)" >> $GITHUB_OUTPUT
