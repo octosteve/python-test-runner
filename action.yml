@@ -1,0 +1,9 @@
+name: "GitHub Classroom Autograding pytest Runner"
+description: "Integrate your CS class wit GitHub using GitHub Classroom"
+outputs:
+  result:
+    description: "Runner output"
+runs:
+  using: docker
+  image: Dockerfile
+  entrypoint: "/opt/test-runner/bin/run.sh"
