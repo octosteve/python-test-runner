@@ -5,4 +5,4 @@ mkdir autograding_output
 
 python3 /opt/test-runner/bin/run.py ./ ./autograding_output/
 
-echo "result=$(cat $GITHUB_WORKSPACE/autograding_output/results.json)" >> $GITHUB_OUTPUT
+echo "result=$(cat $GITHUB_WORKSPACE/autograding_output/results.json | jq -c .)" >> $GITHUB_OUTPUT
