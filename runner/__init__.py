@@ -212,5 +212,5 @@ def run(indir: Directory, outdir: Directory, args: List[str]) -> None:
     # remove cache directories
     for cache_dir in ['.pytest_cache', '__pycache__']:
         dirpath = indir / cache_dir
-        if dirpath.is_dir() and dirpath.owner() == out_file.owner():
+        if dirpath.is_dir():
             shutil.rmtree(dirpath)
