@@ -51,13 +51,17 @@ class ResultsReporter:
         """
 
         name = report.head_line if report.head_line else ".".join(report.nodeid.split("::")[1:])
-
-
         if name not in self.tests:
-            self.tests[name] = Test(name)
-
+            # Extract filename and line number
+            filename = report.location[0]
+            line_no = report.location[1]
+            # Initialize Test with filename and line number
+            self.tests[name] = Test(name, filename=filename, line_no=line_no)
 
         state = self.tests[name]
+
+        # Store duration
+        state.duration = report.duration
 
         # ignore successful setup and teardown stages
         if report.passed and report.when != "call":

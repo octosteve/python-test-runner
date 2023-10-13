@@ -51,6 +51,9 @@ class Test:
     message: Message = None
     test_code: str = ""
     task_id: int = 0
+    filename: str = ""
+    line_no: int = 0
+    duration: float = 0.0 
 
     # for an explanation of why both of these are necessary see
     # https://florimond.dev/blog/articles/2018/10/reconciling-dataclasses-and-properties-in-python/
@@ -164,5 +167,5 @@ class Results:
         for item in results["tests"]:
             item["name"] = sub(trim_name, '\\1 > ', item["name"]).replace('_', ' ')
 
-        results["tests"] = sorted(results["tests"], key= lambda item: item["task_id"])
+        results["tests"] = sorted(results["tests"], key=lambda item: item["task_id"])
         return dumps(results, indent=2)
